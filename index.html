@@ -24,10 +24,94 @@
     // checkbox
     $('#menumobile').menumobile({
       direction: 'down',
+      offset: '50px',
+      columns: 2,
       data: [
         {
           name: 'inicio',
           link: '/'
+        },
+        {
+          name: 'Nuestra historia',
+          link: '#',
+          items: [
+            {
+              name: 'nuestro motor',
+              link: '/nuestro-motor'
+            },
+            {
+              name: 'modelo foris',
+              link: '/modelo-foris'
+            },
+            {
+              name: 'nuestra cruzada',
+              link: '/nuestra-cruzada'
+            },
+            {
+              name: 'sé parte',
+              link: '/se-parte'
+            },
+          ]
+        },
+        {
+          name: 'Solución',
+          link: '#',
+          items: [
+            {
+              name: 'suite de educación',
+              link: '/suite-educacion'
+            },
+            {
+              name: 'catálogos',
+              link: '/catalogos'
+            },
+            {
+              name: 'proyección',
+              link: '/proyeccion'
+            },
+            {
+              name: 'asignación',
+              link: '/asignacion'
+            },
+            {
+              name: 'horarios',
+              link: '/horarios'
+            },
+            {
+              name: 'entrenamiento',
+              link: '/entrenamiento'
+            },
+            {
+              name: 'demo',
+              link: '/demo'
+            },
+          ]
+        },
+        {
+          name: 'Foris',
+          link: '#',
+          items: [
+            {
+              name: 'empresa',
+              link: '/empresa'
+            },
+            {
+              name: 'quienes somos',
+              link: '/quienes-somos'
+            },
+            {
+              name: 'nuestros clientes',
+              link: '/nuestros-clientes'
+            }
+          ]
+        },
+        {
+          name: 'contacto',
+          link: '/contacto'
+        },
+        {
+          name: 'trabaja con nosotros',
+          link: '/trabaja con nostros'
         }
       ]
     })

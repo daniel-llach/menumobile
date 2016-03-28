@@ -93,6 +93,10 @@ urlBase = urlBase.replace('menumobile.js', '');
           default:
 
         }
+        let offset = options['offset'];
+        $el.find('content').css({
+          top: offset
+        })
       } // Todo: falta cuando no trae contenido - $('#sample1').dwSelect()
 
     },
@@ -108,15 +112,38 @@ urlBase = urlBase.replace('menumobile.js', '');
           let template = _.template(result);
           let data = options['data'];
 
-          // options each
-          data.forEach(function (data, i) {
-            let contentHtml = template({
-              name: data['name'],
-              link: data['link']
+            data.forEach(function (data, i) {
+              let contentHtml;
+              let $content = $el.find('content > .items');
+              // options
+              if(typeof data['items'] !== 'undefined' ){
+                // no section
+                if(typeof sectionexist !== 'undefinde'){
+                  let nameId = data['name'].replace(' ','');
+                  // have items
+                  $content.append('<span class="section" id="' + nameId +  '"><h3>' + data['name'] + '</h3><div class="sectionItems"></div></span>');
+                  data['items'].forEach(function(item, i){
+                    contentHtml = template({
+                      name: item['name'],
+                      link: item['link']
+                    });
+                    $content.find('#' + nameId + ' .sectionItems').append(contentHtml);
+
+                  })
+                }
+              }else{
+                // no section, no items
+                contentHtml = template({
+                  name: data['name'],
+                  link: data['link']
+                });
+                // paint it
+                $content.append(contentHtml);
+              }
+
+
             });
-            // paint it
-            $el.find('content .items').append(contentHtml);
-          });
+
 
           // methods.order($el); // order
           events.startMenu($el, $btn, options); // events
@@ -136,7 +163,7 @@ urlBase = urlBase.replace('menumobile.js', '');
     display: function($el, $btn, options){
       $btn.on({
 
-        click: function(event){
+        touchstart: function(event){
           let direction = options['direction'];
           switch (direction) {
             case 'left':

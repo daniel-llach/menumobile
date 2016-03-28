@@ -1,33 +1,6 @@
-// color
-@azulOscuro: #286186;
-@azul2: #3d5e73;
-@blanco: #ffffff;
-@lineaImpar: #eef8f8;
-@lineaPar: #e4efef;
 
 // tipografia
-@font-face {
-font-family: 'Open Sans';
-font-style: normal;
-font-weight: normal;
-/*src: url('../fonts/OpenSans.eot');*/
-src: local('Open Sans'), local('OpenSans'), url('/fonts/OpenSans-Regular.ttf') format('truetype');
-}
-
-@font-face {
-font-family: 'Open Sans';
-font-weight: 300;
-/*src: url('/fonts/OpenSans.eot');*/
-src: local('Open Sans'), local('OpenSans'), url('/fonts/OpenSans-Light.ttf') format('truetype');
-}
-
-@font-face {
-font-family: 'Open Sans';
-font-weight: 700;
-/*src: url('/fonts/OpenSans.eot');*/
-src: local('Open Sans'), local('OpenSans'), url('/fonts/OpenSans-Bold.ttf') format('truetype');
-}
-
+@import url(https://fonts.googleapis.com/css?family=Istok+Web:400,700);   //font-family: 'Istok Web', sans-serif;
 
 // redondeado
 .redondo (@radius: 5px) {
@@ -198,7 +171,47 @@ src: local('Open Sans'), local('OpenSans'), url('/fonts/OpenSans-Bold.ttf') form
   appearance: none;
 }
 
+.translate (@x: -50%, @y: -50%)
+{
+    -webkit-transform: translate( @x, @y );
+    -moz-transform: translate( @x, @y );
+    -o-transform: translate( @x, @y );
+    transform: translate( @x, @y );
+}
 
+.center
+{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+
+  .translate(-50%, -50%);
+
+}
+
+.centerHorizontal
+{
+    position: absolute;
+    left: 50%;
+
+    .translate(-50%, 0%);
+}
+
+.centerHorizontalRelative
+{
+    position: relative;
+    left: 50%;
+
+    .translate(-50%, 0%);
+}
+
+.centerVertical
+{
+    position: absolute;
+    top: 50%;
+
+    .translate(0%, -50%);
+}
 
 //////////////////////////////////////////////////////////
 //////////////////////  INICIO CSS ///////////////////////
@@ -212,7 +225,9 @@ src: local('Open Sans'), local('OpenSans'), url('/fonts/OpenSans-Bold.ttf') form
   position: fixed;
   z-index: 98;
   background: #fff;
-  .animacion(.5s);
+  font-family: 'Istok Web', sans-serif;
+  overflow-y: auto;
+  .animacion(.4s);
 
   &.displayLeft
   {
@@ -229,5 +244,66 @@ src: local('Open Sans'), local('OpenSans'), url('/fonts/OpenSans-Bold.ttf') form
   &.displayDown
   {
     bottom: 0 !important;
+  }
+
+  content
+  {
+    position: relative;
+    display: inline-block;
+    width: 90%;
+    .centerHorizontal;
+
+    .items
+    {
+      width: 100%;
+      box-sizing: border-box;
+      display: inline-block;
+
+      .option
+      {
+        width: 100%;
+        height: auto;
+        float: left;
+
+        a
+        {
+          text-decoration: none;
+          font-size: 13px;
+          line-height: 26px;
+          color: #8E8B8B;
+        }
+      }
+
+      .section
+      {
+        width: 100%;
+        border-bottom: 1px solid #F5F5F5;
+        min-height: 50px;
+        display: inline-block;
+
+        h3
+        {
+          font-size: 15px;
+          display: inline-block;
+          width: 100%;
+          text-transform: uppercase;
+        }
+
+        .sectionItems
+        {
+          width: 100%;
+          display: inline-block;
+
+          .option
+          {
+            width: 50%;
+            box-sizing: border-box;
+            float: left;
+            font-size: 13px;
+            text-transform: lowercase;
+          }
+        }
+      }
+    }
   }
 }
