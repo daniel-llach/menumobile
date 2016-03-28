@@ -14,31 +14,13 @@ urlBase = urlBase.replace('menumobile.js', '');
       // deploy component structure
       let deployment = new Promise(function(resolve, reject){
         methods.deployComponent();
-        resolve()
+        resolve();
       })
       const $el = $('.menumobile');
       deployment.then(function(){
         methods.getTemplate($el, $btn, options);
       })
     }
-    // destroy: function(){
-    //   const $el = $(this);
-    //   $el.empty();
-    //   $el.removeClass('menumobile');
-    // },
-    // restart: function($el){
-      // // previene cuando no hay input
-      // let $content = $el.find('.items .group-content');
-      // $content.show();
-      //
-      // // previene cuando no hay input
-      // let $items = $el.find('.items .option');
-      // $items.show();
-      //
-      // // deselect
-      // $items.removeClass('selected')
-      // $el.data('result','')
-    // },
   }
 
   // Private methods
@@ -54,7 +36,6 @@ urlBase = urlBase.replace('menumobile.js', '');
         let templateContent = result;
         methods.setTemplate($el, $btn, templateContent, options)
       });
-
     },
 
     setTemplate : function($el, $btn, templateContent, options){
@@ -62,33 +43,33 @@ urlBase = urlBase.replace('menumobile.js', '');
       $el.html( template() );
 
       if (typeof options !== 'undefined') {
-        methods.itemTemplate($el, $btn, options)
+        methods.itemTemplate($el, $btn, options);
         // position by direction
-        let direction = options['direction']
+        let direction = options['direction'];
         switch (direction) {
           case 'left':
             $el.css({
               top: 0,
               left: '100%'
-            })
+            });
             break;
           case 'right':
             $el.css({
               top: 0,
               right: '100%'
-            })
+            });
             break;
           case 'up':
             $el.css({
               top: '100%',
               left: 0
-            })
+            });
             break;
           case 'down':
             $el.css({
               bottom: '100%',
               left: 0
-            })
+            });
             break;
           default:
 
@@ -96,7 +77,7 @@ urlBase = urlBase.replace('menumobile.js', '');
         let offset = options['offset'];
         $el.find('content').css({
           top: offset
-        })
+        });
       } // Todo: falta cuando no trae contenido - $('#sample1').dwSelect()
 
     },
@@ -157,7 +138,7 @@ urlBase = urlBase.replace('menumobile.js', '');
   var events = {
 
     startMenu: function($el, $btn, options){
-      events.display($el, $btn, options)
+      events.display($el, $btn, options);
     },
 
     display: function($el, $btn, options){
@@ -167,23 +148,23 @@ urlBase = urlBase.replace('menumobile.js', '');
           let direction = options['direction'];
           switch (direction) {
             case 'left':
-              $el.toggleClass('displayLeft')
+              $el.toggleClass('displayLeft');
               break;
             case 'right':
-              $el.toggleClass('displayRight')
+              $el.toggleClass('displayRight');
               break;
             case 'up':
-              $el.toggleClass('displayUp')
+              $el.toggleClass('displayUp');
               break;
             case 'down':
-              $el.toggleClass('displayDown')
+              $el.toggleClass('displayDown');
               break;
             default:
 
           }
 
         }
-      })
+      });
     }
 
   };
