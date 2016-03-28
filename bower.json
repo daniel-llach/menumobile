@@ -1,0 +1,30 @@
+{
+  "name": "menumobile",
+  "authors": [
+    "daniel-llach <daniel.llach@gmail.com>"
+  ],
+  "description": "A jquery menu component for mobile app/web",
+  "main": [
+    "components/menumobile.js",
+    "components/menumobile.css"
+  ],
+  "moduleType": "es6",
+  "keywords": [
+    "menu",
+    "mobile"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^2.2.1",
+    "underscore": "^1.8.3",
+    "jquery-ui": "^1.11.4"
+  }
+}
