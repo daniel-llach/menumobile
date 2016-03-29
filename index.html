@@ -22,7 +22,7 @@
 
   <script type="text/javascript">
     // checkbox
-    $('menu').menumobile({
+    $('#menu').menumobile({
       direction: 'down',
       offset: 50,
       columns: 2,
@@ -116,4 +116,13 @@
         }
       ]
     })
+
+    // listeners
+    var $menu = $('#menu');
+    $menu.on({
+      change: function(event){
+        var status = $menu.data('status');
+        console.log("menu status: ", status);
+      }
+    });
   </script>

@@ -20,6 +20,9 @@ urlBase = urlBase.replace('menumobile.js', '');
       deployment.then(function(){
         methods.getTemplate($el, btnId, options);
       })
+    },
+    val: function($btn){
+      methods.getVal($btn);
     }
   }
 
@@ -136,6 +139,16 @@ urlBase = urlBase.replace('menumobile.js', '');
           // methods.order($el); // order
           events.startMenu($el, btnId, options); // events
         });
+    },
+
+    getVal: function($btn){
+      var status = $btn.data('status');
+      methods.passResult($btn);
+      return status;
+    },
+
+    passResult: function($btn){
+      $btn.trigger('change');
     }
 
   }
@@ -149,14 +162,16 @@ urlBase = urlBase.replace('menumobile.js', '');
     },
 
     display: function($el, btnId, options){
+      var $btn = $('#' + btnId);
       interact('#' + btnId)
       .on('tap', function (event) {
-        // bar
+        // show bar
         var $bar = $el.find('.bar');
         $bar.css({
           height : options['offset'] + 'px'
         }).toggleClass('show');
 
+        // show content
         var direction = options['direction'];
         switch (direction) {
           case 'left':
@@ -174,6 +189,16 @@ urlBase = urlBase.replace('menumobile.js', '');
           default:
 
         }
+        // trigger status
+        var $menumobile = $('.menumobile');
+        if($menumobile.hasClass('displayLeft') || $menumobile.hasClass('displayRight') || $menumobile.hasClass('displayUp') || $menumobile.hasClass('displayDown')){
+          $btn.data('status','show');
+          api.val($btn);
+        }else{
+          $btn.data('status','hide');
+          api.val($btn);
+        }
+        // prevent default
         var prevent = options['preventDefault'];
         if(prevent){
           event.preventDefault();
