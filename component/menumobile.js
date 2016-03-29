@@ -1,4 +1,3 @@
-"use strict"
 
 var scripts = document.getElementsByTagName("script");
 var urlBase = scripts[scripts.length-1].src;
@@ -6,46 +5,47 @@ urlBase = urlBase.replace('menumobile.js', '');
 
 // dwFilter
 (function( $ ){
+  "use strict"
 
   // Public methods
-  let api = {
+  var api = {
     init : function(options) {
-      const $btn = $(this);
+      var btnId = $(this).attr('id');
       // deploy component structure
-      let deployment = new Promise(function(resolve, reject){
+      var deployment = new Promise(function(resolve, reject){
         methods.deployComponent();
         resolve();
       })
-      const $el = $('.menumobile');
+      var $el = $('.menumobile');
       deployment.then(function(){
-        methods.getTemplate($el, $btn, options);
+        methods.getTemplate($el, btnId, options);
       })
     }
   }
 
   // Private methods
-  let methods = {
+  var methods = {
 
     deployComponent: function(){
       // convert the div into a dw-filter component
       $('body').append('<div class="menumobile"></div>');
     },
 
-    getTemplate: function($el, $btn, options){
+    getTemplate: function($el, btnId, options){
       $.get(urlBase + "templates/menumobile.html", function( result ) {
-        let templateContent = result;
-        methods.setTemplate($el, $btn, templateContent, options)
+        var templateContent = result;
+        methods.setTemplate($el, btnId, templateContent, options)
       });
     },
 
-    setTemplate : function($el, $btn, templateContent, options){
-      let template = _.template(templateContent);
+    setTemplate : function($el, btnId, templateContent, options){
+      var template = _.template(templateContent);
       $el.html( template() );
 
       if (typeof options !== 'undefined') {
-        methods.itemTemplate($el, $btn, options);
+        methods.itemTemplate($el, btnId, options);
         // position by direction
-        let direction = options['direction'];
+        var direction = options['direction'];
         switch (direction) {
           case 'left':
             $el.css({
@@ -74,33 +74,40 @@ urlBase = urlBase.replace('menumobile.js', '');
           default:
 
         }
-        let offset = options['offset'];
-        $el.find('content').css({
-          top: offset
-        });
+        var offset = options['offset'];
+        if ( $(document).width() < 768 ){
+          $el.find('content').css({
+            top: (offset + 78) + 'px'
+          });
+        }else{
+          $el.find('content').css({
+            top: offset + 'px'
+          });
+
+        }
       } // Todo: falta cuando no trae contenido - $('#sample1').dwSelect()
 
     },
-    itemTemplate: function($el, $btn, options){
-      // let data = options.data[0];
-      methods.optionTemplate($el, $btn, options);
+    itemTemplate: function($el, btnId, options){
+      // var data = options.data[0];
+      methods.optionTemplate($el, btnId, options);
     },
-    optionTemplate: function($el, $btn, options){
+    optionTemplate: function($el, btnId, options){
       // put items
-      let template;
+      var template;
       template = "templates/items.html";
       $.get(urlBase + template, function( result ) {
-          let template = _.template(result);
-          let data = options['data'];
+          var template = _.template(result);
+          var data = options['data'];
 
             data.forEach(function (data, i) {
-              let contentHtml;
-              let $content = $el.find('content > .items');
+              var contentHtml;
+              var $content = $el.find('content > .items');
               // options
               if(typeof data['items'] !== 'undefined' ){
                 // no section
                 if(typeof sectionexist !== 'undefinde'){
-                  let nameId = data['name'].replace(' ','');
+                  var nameId = data['name'].replace(' ','');
                   // have items
                   $content.append('<span class="section" id="' + nameId +  '"><h3>' + data['name'] + '</h3><div class="sectionItems"></div></span>');
                   data['items'].forEach(function(item, i){
@@ -127,7 +134,7 @@ urlBase = urlBase.replace('menumobile.js', '');
 
 
           // methods.order($el); // order
-          events.startMenu($el, $btn, options); // events
+          events.startMenu($el, btnId, options); // events
         });
     }
 
@@ -137,34 +144,35 @@ urlBase = urlBase.replace('menumobile.js', '');
   // Events
   var events = {
 
-    startMenu: function($el, $btn, options){
-      events.display($el, $btn, options);
+    startMenu: function($el, btnId, options){
+      events.display($el, btnId, options);
     },
 
-    display: function($el, $btn, options){
-      $btn.on({
-
-        touchstart: function(event){
-          let direction = options['direction'];
-          switch (direction) {
-            case 'left':
-              $el.toggleClass('displayLeft');
-              break;
-            case 'right':
-              $el.toggleClass('displayRight');
-              break;
-            case 'up':
-              $el.toggleClass('displayUp');
-              break;
-            case 'down':
-              $el.toggleClass('displayDown');
-              break;
-            default:
-
-          }
+    display: function($el, btnId, options){
+      interact('#' + btnId)
+      .on('tap', function (event) {
+        var direction = options['direction'];
+        switch (direction) {
+          case 'left':
+          $el.toggleClass('displayLeft');
+          break;
+          case 'right':
+          $el.toggleClass('displayRight');
+          break;
+          case 'up':
+          $el.toggleClass('displayUp');
+          break;
+          case 'down':
+          $el.toggleClass('displayDown');
+          break;
+          default:
 
         }
-      });
+        event.preventDefault();
+      })
+
+
+
     }
 
   };

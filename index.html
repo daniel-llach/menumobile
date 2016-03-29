@@ -10,6 +10,7 @@
     <!-- wd-select dependencies -->
     <script src="./bower_components/jquery/dist/jquery.min.js" type="text/javascript"></script>
     <script src="./bower_components/underscore/underscore-min.js" type="text/javascript"></script>
+    <script src="./bower_components/interact/dist/interact.min.js" type="text/javascript"></script>
     <script src="./component/menumobile.js" type="text/javascript"></script>
     <link rel="stylesheet" type="text/css" href="./component/menumobile.css">
 
@@ -17,14 +18,13 @@
 
 </head>
 <body>
-  <menu id="menumobile"> menu </menu>
-
+  <menu id="menu">menu</menu>
 
   <script type="text/javascript">
     // checkbox
-    $('#menumobile').menumobile({
+    $('menu').menumobile({
       direction: 'down',
-      offset: '50px',
+      offset: 50, 
       columns: 2,
       data: [
         {
@@ -115,20 +115,4 @@
         }
       ]
     })
-
-    // listeners
-    // var smpl1 = $('#sample1');
-    // var smpl2 = $('#sample2');
-    // smpl1.on({
-    //   change: function(event){
-    //     var result = smpl1.data('result');
-    //     console.log("sample1 data: ", result);
-    //   }
-    // });
-    // smpl2.on({
-    //   change: function(event){
-    //     var result = smpl2.data('result');
-    //     console.log("sample2 data: ", result);
-    //   }
-    // });
   </script>
