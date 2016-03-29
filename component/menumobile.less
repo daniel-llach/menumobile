@@ -246,11 +246,28 @@
     bottom: 0 !important;
   }
 
+  .bar
+  {
+    display: none;
+    width: 100%;
+    background: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 97;
+
+    &.show
+    {
+      display: none;
+    }
+  }
+
   content
   {
     position: relative;
     display: inline-block;
     width: 90%;
+    z-index: 96;
     .centerHorizontal;
 
     .items

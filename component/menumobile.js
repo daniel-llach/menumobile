@@ -151,6 +151,12 @@ urlBase = urlBase.replace('menumobile.js', '');
     display: function($el, btnId, options){
       interact('#' + btnId)
       .on('tap', function (event) {
+        // bar
+        var $bar = $el.find('.bar');
+        $bar.css({
+          height : options['offset'] + 'px'
+        }).toggleClass('show');
+
         var direction = options['direction'];
         switch (direction) {
           case 'left':
