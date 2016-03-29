@@ -168,10 +168,11 @@ urlBase = urlBase.replace('menumobile.js', '');
           default:
 
         }
-        event.preventDefault();
+        var prevent = options['preventDefault'];
+        if(prevent){
+          event.preventDefault();
+        }
       })
-
-
 
     }
 
