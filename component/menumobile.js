@@ -75,7 +75,6 @@ urlBase = urlBase.replace('menumobile.js', '');
             });
             break;
           default:
-
         }
         var offset = options['offset'];
         if ( $(document).width() < 768 ){
@@ -88,6 +87,14 @@ urlBase = urlBase.replace('menumobile.js', '');
           });
 
         }
+        // animation speed
+        var speed = options['speed'] + 's';
+        $el.css({
+          '-webkit-transition': 'all ' + speed + ' ease-in-out',
+          '-moz-transition': 'all ' + speed + ' ease-in-out',
+          '-o-transition': 'all ' + speed + ' ease-in-out',
+          'transition': 'all ' + speed + ' ease-in-out'
+        })
       } // Todo: falta cuando no trae contenido - $('#sample1').dwSelect()
 
     },
